@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <title>ToDoApp</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h3 style="text-align:center;height:6vh;"class="bg-info title">ToDoList</h3>
+            </div>
+        </div>
+        <div class="container bg-dark" style="height:auto">
+            <div class="row">
+                <div class="col-12 input_container container-fluid"id="input_container">
+                    <input type="text"placeholder="Enter Task To Add"class="input_task"id="input_task"required>
+                    <button style="width:80px;border-radius:7px;" class="bg-success border-dark text-white"id="button">Add</button>
+                </div>
+                <div class="heading text-white"><h6 style="text-align:center;">List Of Tasks</h6></div>
+            </div>
+            <div class="row list_container">
+                <div class="col-12">
+                    <ol id="ol"class="list-group"></ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
+<style>
+    .title,.input_container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .input_container{
+        padding:10px;
+        gap:10px;
+    }
+    .input_task{
+        width: 90%;
+        height:40px;
+    }
+</style>
+<script>
+    let Task = "";
+    let input = document.getElementById("input_task");
+    let button = document.getElementById("button");
+    let ol = document.getElementById("ol");
+    ol.style.listStyleType = "number"
+    let Error = document.createElement("p");
+    let container = document.getElementById("input_container");
+    var sno=0;
+    button.addEventListener("click",function(){
+        Task = input.value ;
+        if(Task==""){
+            Error.setAttribute("class","text-white");
+            Error.textContent = "Task Shouldn't Be Empty"
+            container.appendChild(Error);
+
+            setTimeout(function(){
+                container.removeChild(Error);
+            },5000);
+        }
+        else{
+            sno = sno+1;
+            let li = document.createElement("li");
+            let text_content = sno+". "+Task;
+            li.textContent = text_content;
+            li.setAttribute("class","list-group-item bg-dark");
+            li.style.color = "white";
+            ol.appendChild(li);
+        }
+    })
+</script>
